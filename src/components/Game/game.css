@@ -1,0 +1,64 @@
+.game {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.navBar {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+.gameField {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.field {
+    position: relative;
+    overflow: hidden;
+}
+
+.buttonBlock {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+}
+
+.score {
+    display: flex;
+    justify-content: center;
+}
+
+.cell {
+    border-radius: 10%;
+    user-select: none;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2;
+    transition: all .4s linear;
+}
+
+.pathSegment {
+    position: absolute;
+    z-index: 1;
+    transform-origin: 0px 0px;
+}
+
+.pick {
+    animation: pickCell 0.3s linear;
+}
+
+div {
+    cursor: pointer
+}
+
+@keyframes pickCell {
+    0% {transform: scale(1);}
+    50% { transform: scale(1.1);}
+    100% {transform: scale(1);}
+}

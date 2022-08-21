@@ -2,10 +2,28 @@ import { createAsyncThunk } from "@reduxjs/toolkit"
 
 export const overTurn = createAsyncThunk (
     'game/overTurn',
+    async (_, {rejectWithValue, dispatch}) => {
+        try { 
+            const delay = new Promise((res, rej) => {
+                setTimeout(() => {
+                    dispatch(toNextStep())
+                    res()
+                }, 300)
+            })
+            await delay
+            return 
+        } catch (error) {
+            return rejectWithValue(error.message)
+        }
+    }
+)
+
+export const toNextStep = createAsyncThunk(
+    'game/toNextStep',
     async (_, {rejectWithValue}) => {
         try { 
             const delay = new Promise((res, rej) => {
-                setTimeout(() => res(), 400)
+                setTimeout(() => res(), 300)
             })
             await delay
             return 
@@ -17,10 +35,13 @@ export const overTurn = createAsyncThunk (
 
 export const toNextLevel = createAsyncThunk (
     'game/toNextLevel',
-    async (_, {rejectWithValue}) => {
+    async (_, {rejectWithValue, dispatch}) => {
         try { 
             const delay = new Promise((res, rej) => {
-                setTimeout(() => res(), 300)
+                setTimeout(() => {
+                    dispatch(toNextStep())
+                    res()
+                }, 300)
             })
             await delay
             return 
@@ -36,7 +57,10 @@ export const destroyCell = createAsyncThunk (
         try { 
             dispatch(pickCellForDestroy(cell))
             const delay = new Promise((res, rej) => {
-                setTimeout(() => res(), 300)
+                setTimeout(() => {
+                    dispatch(toNextStep())
+                    res()
+            }, 300)
             })
             await delay
             return 

@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { Game } from '../Game/Game';
 import getCellSize from '../Hooks/getCellSize';
-import { destroyCell, overTurn, pickCellForDestroy, toNextLevel } from './asyncAction';
+import { destroyCell, overTurn, pickCellForDestroy, toNextLevel, toNextStep } from './asyncAction';
 
 const game = new Game(getCellSize())
 /* eslint-disable no-param-reassign */
@@ -51,16 +51,29 @@ export const gameSlice = createSlice({
         state.isTurn = false
         state.pathSegments = game.path.pathSegments
         state.field = curGame.field
+        state.score = curGame.score
+        state.diamonds = curGame.diamonds
       },
       [overTurn.fulfilled]: (state) => {
-        game.toNextStep()
-        const curGame = game.render()
-        state.isNewLevel = curGame.isNewLevel
-        state.field = curGame.field
-        state.newLevelData = curGame.newLevelData
+
       },
       [overTurn.rejected]: (state) => {
         state.isTurn = false
+      },
+      [toNextStep.pending]: (state) => {
+        game.field.dropDown()
+        const curGame = game.render()
+        state.field = curGame.field
+      },
+      [toNextStep.fulfilled]: (state) => {
+        game.field.update()
+        const curGame = game.render()
+        state.field = curGame.field
+        state.isNewLevel = curGame.isNewLevel
+        state.newLevelData = curGame.newLevelData
+      },
+      [toNextStep.rejected]: (state) => {
+        
       },
       [toNextLevel.pending]: (state) => {
         game.toNextLvl()
@@ -70,9 +83,7 @@ export const gameSlice = createSlice({
         state.newLevelData = curGame.newLevelData
       },
       [toNextLevel.fulfilled]: (state) => {
-        game.toNextStep()
-        const curGame = game.render()
-        state.field = curGame.field
+
       },
       [toNextLevel.rejected]: (state) => {
         state.isTurn = false
@@ -81,9 +92,7 @@ export const gameSlice = createSlice({
         state.isDestroyMode = false
       },
       [destroyCell.fulfilled]: (state) => {
-        game.toNextStep()
-        const curGame = game.render()
-        state.field = curGame.field
+        
       },
       [destroyCell.rejected]: (state) => {
         state.isDestroyMode = false

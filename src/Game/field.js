@@ -17,7 +17,6 @@ export class Field {
     #minValue
     #maxValue
     #removeOnNextStep
-    #cellsWillAdd = []
     #removedCellNumbers = {}
     constructor(size, minValue, maxValue) {
         this.#size = size
@@ -100,8 +99,12 @@ export class Field {
         this.#removeOnNextStep = []
     }
     swapCells(cell1, cell2) {
-        this.field[cell1.y][cell1.x] = cell2
-        this.field[cell2.y][cell2.x] = cell1
+        let x1 = cell1.x
+        let y1 = cell1.y
+        let x2 = cell2.x
+        let y2 = cell2.y
+        this.field[y1][x1] = cell2
+        this.field[y2][x2] = cell1
         this.update()
     }
 
@@ -123,8 +126,10 @@ export class Field {
         return this.field.reduce((acc, line) => [...acc, ...line], [])
     }
     dropDown() {
+        console.log(this.field)
         let columnsWithDeletedCells = Object.keys(this.#removedCellNumbers)
         this.field = this.field.map( line => line.map( cell => cell.isDeleted ? '' : cell))
+        
         columnsWithDeletedCells.forEach (x => {
             x= +x
             let cellDown = 0 
@@ -133,39 +138,11 @@ export class Field {
                     cellDown += 1
                 } else if ( cellDown ) {
                     let cell = this.field[y][x]
-                    cell.update(x,y+cellDown)
                     cell.setPosition()
                     this.field[y+cellDown][x] = cell
                     this.field[y][x] = ''
-                } else {
-                    this.field[y][x].update(x, y)
                 }
             }
-            this.#cellsWillAdd.forEach( cell => {
-                    if(cell.x === x) {
-                        this.field[cell.y+cellDown][x] = cell
-                        cell.update(x,cell.y+cellDown)  
-                        cell.setPosition()
-                    }
-                })
-        }) 
-        this.#cellsWillAdd = []
-        this.#removeOnNextStep = []
-    }
-    addCellsAsReplaceDeleted() {
-        this.#removedCellNumbers = this.#removeOnNextStep.reduce( (acc, cell) => {
-            let x = cell.x
-            if (!acc[x]){
-                acc[x]  = 1
-            }else {
-                acc[x] += 1
-            }
-            return acc
-        },{})
-        let columnsWithDeletedCells = Object.keys(this.#removedCellNumbers)
-        columnsWithDeletedCells.forEach (x => {
-            x= +x
-            let cellDown = this.#removedCellNumbers[x] 
             for (let y = 0; y < cellDown; y++) {
                 let value = this.#getRandom()
                 let newCell = new Cell({
@@ -174,9 +151,11 @@ export class Field {
                     x,
                     size: this.#size
                 })
-                this.#cellsWillAdd.push(newCell)
+                this.field[y][x] = newCell
             }
-        })         
+        }) 
+        this.#removedCellNumbers = []
+        this.#removeOnNextStep = []
     }
     markForDeleting(cells, newValue) {
         let lastCell
@@ -184,7 +163,16 @@ export class Field {
             lastCell = cells.pop()
         }
         this.#removeOnNextStep = cells
-        this.addCellsAsReplaceDeleted()
+       this.#removedCellNumbers = this.#removeOnNextStep.reduce( (acc, cell) => {
+        let x = cell.x
+        if (!acc[x]){
+            acc[x]  = 1
+        }else {
+            acc[x] += 1
+        }
+        return acc
+        },{})
+
         if(lastCell) {
             lastCell.value = newValue
             cells.forEach( cell => {
@@ -209,9 +197,8 @@ export class Field {
             row.forEach( cell => flatField.push(cell.render()))
             return flatField
         }, [])
-        let cellsWillAdd =  this.#cellsWillAdd.map(cell => cell.render())
         return {
-            field: [...flatField, ...cellsWillAdd]
+            field: flatField
         }
     }
 }

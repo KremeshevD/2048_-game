@@ -1,4 +1,3 @@
-import { useEffect } from "react"
 import { getValueForDisplay } from "../../Utils/getValueForDisplay"
 
 export const Cell = ({cell, onPointerDown, top, onClick, isSwaping}) => {

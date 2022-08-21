@@ -20,5 +20,16 @@ export class PathSegment {
         this.length = Math.floor(length)
         this.angle = Math.floor(deg) - 180
     }
-
+    render() {
+        return {
+            xs: this.xs,
+            ys: this.ys,
+            xe: this.xe,
+            ye: this.ye,
+            color: this.color,
+            id: this.id,
+            angle: this.angle,
+            length: this.length
+        }
+    }
 }

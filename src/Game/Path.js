@@ -7,6 +7,7 @@ export class Path {
     }
     
     addNewPoint(newPoint) {
+        this.pathSegments = [...this.pathSegments]
         this.pathPoints.push(newPoint)
         if (this.pathPoints.length > 1) {
             let prevPoint = this.pathPoints[this.pathPoints.length-2]
@@ -62,5 +63,15 @@ export class Path {
         this.pathSegments = []
     }
 
+    getPathSegments() {
+        return [...this.pathSegments]
+    }
+    render() {
+        return {
+        pathSegments: this.pathSegments.map( item => item.render()),
+        pathPoints: this.pathPoints.map( item => item.render())
+        }
+
+    }
 
 }

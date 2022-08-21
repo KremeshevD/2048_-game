@@ -8,6 +8,10 @@ export class Cell {
         this.size = size
         this.setPosition()
         this.#setColor()
+        this.isVisited = false
+        this.shoulRemove = false
+        this.isUnited = false
+        this.isDeleted = false
     }
     #setColor() {
         const colors = ['red', 'green', 'Lime', 'blue', 'pink' ,'brown', 'Chartreuse', 'Aquamarine', 'purple','violet', 'yellow' ]
@@ -16,6 +20,7 @@ export class Cell {
     set value(newValue) {
             if (newValue > this.value) {
                 this._value = newValue
+                this.isUnited = true
                 this.#setColor()
             } else {
                 this._value = newValue
@@ -23,6 +28,11 @@ export class Cell {
     }
     get value() {
         return this._value
+    }
+    forDeleting(x = this.x, y = this.y) {
+        this.isDeleted = true
+        this.update(x, y)
+        this.setPosition()
     }
     setPosition() {
         if (this.x === 0) {
@@ -40,6 +50,29 @@ export class Cell {
         this.x = x
         this.y = y
         this.xy = `${x},${y}`
+        this.isUnited = false
+        this.isVisited = false
+        //this.isDeleted = false
+    }
+    setVisited(val) {
+        this.isVisited = val
+    }
+    render() {
+        return {
+           size: this.size,
+           id: this.id,
+           value: this._value,
+           x: this.x,
+           y: this.y,
+           xy: this.xy,
+           left: this.left,
+           top: this.top,
+           color: this.color,
+           isVisited: this.isVisited,
+           shoulRemove: this.shoulRemove,
+           isUnited: this.isUnited,
+           isDeleted: this.isDeleted
+        }
     }
     
 }

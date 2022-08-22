@@ -79,6 +79,9 @@ export const gameSlice = createSlice({
         state.field = curGame.field
         state.isNewLevel = curGame.isNewLevel
         state.newLevelData = curGame.newLevelData
+        state.maxValue = game.maxValue
+        state.minValue = game.minValue
+        state.score = game.score
         localStorage.setItem('game', JSON.stringify(state))
       },
       [toNextStep.rejected]: (state) => {

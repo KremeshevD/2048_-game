@@ -168,10 +168,10 @@ export class Game {
         }
     }
     restore(state) {
-        this.minValue = state.minValue
-        this.maxValue = state.maxValue 
         this.field.restore({
-            cells: state.field
+            cells: state.field,
+            minValue: state.minValue,
+            maxValue: state.maxValue
         })
         this.maxValueOnfiel = state.maxValueOnfiel
         this.score = state.score
@@ -182,6 +182,8 @@ export class Game {
         this.isGameOver = false
         this.isNewLevel = false
         this.newLevelData = {}
+        this.minValue = state.minValue
+        this.maxValue = state.maxValue 
     }
     
 }

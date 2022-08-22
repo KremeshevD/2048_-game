@@ -202,7 +202,9 @@ export class Field {
         }
     }
 
-    restore({cells}) {
+    restore({cells, minValue, maxValue}) {
+        this.#minValue = minValue
+        this.#maxValue = maxValue
         cells.forEach( cell => {
             this.field[cell.y][cell.x] = new Cell({
                 value: cell.value,

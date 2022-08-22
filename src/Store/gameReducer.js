@@ -3,17 +3,25 @@ import { Game } from '../Game/Game';
 import getCellSize from '../Hooks/getCellSize';
 import { destroyCell, overTurn, pickCellForDestroy, toNextLevel, toNextStep } from './asyncAction';
 
+
 const game = new Game(getCellSize())
-/* eslint-disable no-param-reassign */
-export const gameSlice = createSlice({
-  name: 'game',
-  initialState: {
+const savedGame = localStorage.getItem('game')
+if(savedGame) {
+  game.restore(JSON.parse(savedGame))
+} 
+const initialState = {
     ...game.render(),
     isTurn: false,
     isSwapMode: false,
     isDestroyMode: false,
     swapingCells: []
-  },
+  }
+
+
+
+export const gameSlice = createSlice({
+  name: 'game',
+  initialState,
   reducers: {
     startTurn (state, {payload}) {
         game.startTurn(payload)
@@ -71,6 +79,7 @@ export const gameSlice = createSlice({
         state.field = curGame.field
         state.isNewLevel = curGame.isNewLevel
         state.newLevelData = curGame.newLevelData
+        localStorage.setItem('game', JSON.stringify(state))
       },
       [toNextStep.rejected]: (state) => {
         

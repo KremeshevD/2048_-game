@@ -201,4 +201,15 @@ export class Field {
             field: flatField
         }
     }
+
+    restore({cells}) {
+        cells.forEach( cell => {
+            this.field[cell.y][cell.x] = new Cell({
+                value: cell.value,
+                y: cell.y,
+                x: cell.x,
+                size: this.#size
+            })
+        })
+    }
 }

@@ -167,5 +167,21 @@ export class Game {
 
         }
     }
+    restore(state) {
+        this.minValue = state.minValue
+        this.maxValue = state.maxValue 
+        this.field.restore({
+            cells: state.field
+        })
+        this.maxValueOnfiel = state.maxValueOnfiel
+        this.score = state.score
+        this.diamonds = state.diamonds
+        this.newLevel = false
+        this.levelInfo = {}
+        this.score = state.score
+        this.isGameOver = false
+        this.isNewLevel = false
+        this.newLevelData = {}
+    }
     
 }

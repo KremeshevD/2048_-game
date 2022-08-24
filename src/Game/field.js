@@ -126,7 +126,6 @@ export class Field {
         return this.field.reduce((acc, line) => [...acc, ...line], [])
     }
     dropDown() {
-        console.log(this.field)
         let columnsWithDeletedCells = Object.keys(this.#removedCellNumbers)
         this.field = this.field.map( line => line.map( cell => cell.isDeleted ? '' : cell))
         

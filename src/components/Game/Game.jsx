@@ -7,6 +7,7 @@ import { getPointerPosition } from "../../Utils/eventParser"
 import { overTurn } from '../../Store/asyncAction'
 import { ButtonBlock } from './buttonBlock/ButtonBlock'
 import { ModalWindow } from './ModalWindow'
+import { Score } from './Score/Score'
 
 export const Game = () => {
     let cellSize = useCellSize()
@@ -49,7 +50,7 @@ export const Game = () => {
                 <div>Best Score: {score}</div>
             </div>
             <div className="gameField" style={gameFieldStyle}   onPointerMove={moveHandler} >
-                <div className="score">{score}</div>
+                <div className="score"><Score score ={score}/></div>
                 <hr style={lineStyle}></hr>
                     <Field />
                 <hr style={lineStyle}></hr>

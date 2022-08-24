@@ -1,4 +1,6 @@
-export const Cell = ({cell, onPointerDown, top, onClick, visited}) => {
+import { getValueForDisplay } from "../../Utils/getValueForDisplay"
+
+export const Cell = ({cell, onPointerDown, top, onClick, isSwaping}) => {
     let style = {
         top: top,
         width: cell.size,
@@ -7,12 +9,13 @@ export const Cell = ({cell, onPointerDown, top, onClick, visited}) => {
         backgroundColor: cell.color,
     }
     let classes = 'cell'
-    const isVisited = visited && cell.id === visited.id ? true : false
-    if (isVisited) {
-        classes += " pick"
-        
-    }
-    const value = Math.pow(2, cell.value)
+    classes += cell.isVisited ? " pick" : ""
+    classes += isSwaping ?  " swapingCell" : ""
+    classes += cell.isUnited ? " unite" : ""
+    classes += cell.isDeleted ? " deletedCell" : ""
+    
+    const value = getValueForDisplay(cell.value)
+
     return (
         <div 
             className={classes}

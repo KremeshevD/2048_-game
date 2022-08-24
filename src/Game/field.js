@@ -16,6 +16,8 @@ export class Field {
     #size
     #minValue
     #maxValue
+    #removeOnNextStep
+    #removedCellNumbers = {}
     constructor(size, minValue, maxValue) {
         this.#size = size
         this.#minValue = minValue
@@ -59,7 +61,7 @@ export class Field {
                     }
             })
         )
-        this.removeCells(cellList)
+        this.markForDeleting(cellList)
     }
 
     getCell(x,y) {
@@ -90,15 +92,20 @@ export class Field {
         return this.#difForcheck.includes(`${xDif},${yDif}`)
     }
 
-    removeCells(cells) {
+    removeCells(cells = this.#removeOnNextStep) {
         cells.forEach( cell => {
             this.field[cell.y][cell.x] = ''
         })
-        this.dropDown(cells)
+        this.#removeOnNextStep = []
     }
     swapCells(cell1, cell2) {
-        this.field[cell1.y][cell1.x] = cell2
-        this.field[cell2.y][cell2.x] = cell1
+        let x1 = cell1.x
+        let y1 = cell1.y
+        let x2 = cell2.x
+        let y2 = cell2.y
+        this.field[y1][x1] = cell2
+        this.field[y2][x2] = cell1
+        this.update()
     }
 
     setValueRange(min, max) {
@@ -115,26 +122,22 @@ export class Field {
         this.#minValue = min
         this.#removeCellByValue(valueForRemove)
     }
-    dropDown(removedCells) {
-        let removedCellNumbers = removedCells.reduce( (acc, cell) => {
-            let x = cell.x
-            if (!acc[x]){
-                acc[x]  = 1
-            }else {
-                acc[x] += 1
-            }
-            return acc
-        },{})
-        let columnsWithDeletedCells = Object.keys(removedCellNumbers)
+    renderField() {
+        return this.field.reduce((acc, line) => [...acc, ...line], [])
+    }
+    dropDown() {
+        let columnsWithDeletedCells = Object.keys(this.#removedCellNumbers)
+        this.field = this.field.map( line => line.map( cell => cell.isDeleted ? '' : cell))
+        
         columnsWithDeletedCells.forEach (x => {
             x= +x
             let cellDown = 0 
             for (let y = this.field.length - 1; y >= 0; y--) {
-                if(!this.field[y][x]) {
+                if(this.field[y][x] === '') {
                     cellDown += 1
                 } else if ( cellDown ) {
                     let cell = this.field[y][x]
-                    cell.update(x,y+cellDown)
+                    cell.setPosition()
                     this.field[y+cellDown][x] = cell
                     this.field[y][x] = ''
                 }
@@ -150,7 +153,35 @@ export class Field {
                 this.field[y][x] = newCell
             }
         }) 
-        
+        this.#removedCellNumbers = []
+        this.#removeOnNextStep = []
+    }
+    markForDeleting(cells, newValue) {
+        let lastCell
+        if(newValue) {
+            lastCell = cells.pop()
+        }
+        this.#removeOnNextStep = cells
+       this.#removedCellNumbers = this.#removeOnNextStep.reduce( (acc, cell) => {
+        let x = cell.x
+        if (!acc[x]){
+            acc[x]  = 1
+        }else {
+            acc[x] += 1
+        }
+        return acc
+        },{})
+
+        if(lastCell) {
+            lastCell.value = newValue
+            cells.forEach( cell => {
+                cell.forDeleting(lastCell.x, lastCell.y)
+            })
+        } else {
+            cells.forEach( cell => {
+                cell.forDeleting()
+            })
+        }
     }
     update = () =>{
         this.field.forEach((line,y) => 
@@ -159,5 +190,27 @@ export class Field {
                     cell.setPosition()
             })
         )
+    }
+    render = () => {
+        let flatField = this.field.reduce((flatField, row) => {
+            row.forEach( cell => flatField.push(cell.render()))
+            return flatField
+        }, [])
+        return {
+            field: flatField
+        }
+    }
+
+    restore({cells, minValue, maxValue}) {
+        this.#minValue = minValue
+        this.#maxValue = maxValue
+        cells.forEach( cell => {
+            this.field[cell.y][cell.x] = new Cell({
+                value: cell.value,
+                y: cell.y,
+                x: cell.x,
+                size: this.#size
+            })
+        })
     }
 }

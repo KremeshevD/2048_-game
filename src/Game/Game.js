@@ -9,7 +9,7 @@ export class Game {
         this.minValue = 1
         this.maxValue = 8  
         this.field = new Field(cellSize, this.minValue, this.maxValue)
-        this.maxValueOnfiel = 8
+        this.maxValueOnField = 8
         this.score = 0
         this.diamonds = 0
         this.path=new Path()
@@ -44,20 +44,20 @@ export class Game {
         return false
     }
     #isNewLevel(value) {
-                if (value > this.maxValueOnfiel) {
-                    const dif = this.minValue - this.maxValueOnfiel
-                    this.maxValueOnfiel = value
-                    if(this.maxValueOnfiel >= 9 && this.maxValue === 8) {
+                if (value > this.maxValueOnField) {
+                    const dif = this.minValue - this.maxValueOnField
+                    this.maxValueOnField = value
+                    if(this.maxValueOnField >= 9 && this.maxValue === 8) {
                         this.maxValue += 1
                         this.minValue += 1
                         this.diamonds += 30
                         this.newLevelData = {
                             newValue: this.maxValue,
                             removedValue: this.minValue - 1,
-                            newMaxValue: this.maxValueOnfiel
+                            newMaxValue: this.maxValueOnField
                         }
                         this.isNewLevel = true
-                    } else if (this.maxValueOnfiel >= 14 && this.maxValue === 9) {
+                    } else if (this.maxValueOnField >= 14 && this.maxValue === 9) {
                         this.maxValue += 1
                         this.minValue += 1   
                         this.diamonds += 30+this.maxValue-7
@@ -65,9 +65,9 @@ export class Game {
                         this.newLevelData = {
                             newValue: this.maxValue,
                             removedValue: this.minValue - 1,
-                            newMaxValue: this.maxValueOnfiel
+                            newMaxValue: this.maxValueOnField
                         }                   
-                    } else if (this.maxValueOnfiel >= 17) {
+                    } else if (this.maxValueOnField >= 17) {
                         this.maxValue += dif
                         this.minValue += dif  
                         this.diamonds += 30+this.maxValue-7
@@ -75,7 +75,7 @@ export class Game {
                         this.newLevelData = {
                             newValue: this.maxValue,
                             removedValue: this.minValue - 1,
-                            newMaxValue: this.maxValueOnfiel
+                            newMaxValue: this.maxValueOnField
                         }                    
                     }
                 } else {
@@ -86,7 +86,7 @@ export class Game {
         this.minValue = 1
         this.maxValue = 8   
         this.field = new Field(this.cellSize, this.minValue, this.maxValue)
-        this.maxValueOnfiel = 8
+        this.maxValueOnField = 8
         this.score = 0
         this.path=new Path()
         this.newLevel = false
@@ -158,7 +158,7 @@ export class Game {
             minValue: this.minValue,
             maxValue: this.maxValue,
             score: this.score,
-            maxValueOnfiel: this.maxValueOnfiel,
+            maxValueOnField: this.maxValueOnField,
             isNewLevel: this.isNewLevel,
             isGameOver: this.isGameOver,
             newLevelData: this.newLevelData, 
@@ -173,7 +173,7 @@ export class Game {
             minValue: state.minValue,
             maxValue: state.maxValue
         })
-        this.maxValueOnfiel = state.maxValueOnfiel
+        this.maxValueOnField = state.maxValueOnField
         this.score = state.score
         this.diamonds = state.diamonds
         this.newLevel = false

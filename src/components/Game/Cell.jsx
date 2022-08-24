@@ -1,6 +1,7 @@
 import { getValueForDisplay } from "../../Utils/getValueForDisplay"
 
-export const Cell = ({cell, onPointerDown, top, onClick, isSwaping}) => {
+export const Cell = ({cell, onPointerDown, top, onClick, isSwaping, maxValueOnField}) => {
+    let isMax =  cell.value > 7 && maxValueOnField === cell.value
     let style = {
         top: top,
         width: cell.size,
@@ -13,6 +14,8 @@ export const Cell = ({cell, onPointerDown, top, onClick, isSwaping}) => {
     classes += isSwaping ?  " swapingCell" : ""
     classes += cell.isUnited ? " unite" : ""
     classes += cell.isDeleted ? " deletedCell" : ""
+    classes += isMax ? " maxValue" : ""
+
     
     const value = getValueForDisplay(cell.value)
 

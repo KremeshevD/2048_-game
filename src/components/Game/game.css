@@ -43,8 +43,14 @@
     align-items: center;
     z-index: 2;
     transition: all .4s linear;
+    flex-direction: column;
 }
 
+.maxValue::before {
+    content: '\1F451';
+    position: absolute;
+    top: -0.1em
+}
 .pathSegment {
     position: absolute;
     z-index: 1;

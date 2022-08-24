@@ -61,6 +61,7 @@ export const gameSlice = createSlice({
         state.field = curGame.field
         state.score = curGame.score
         state.diamonds = curGame.diamonds
+        state.maxValueOnField = curGame.maxValueOnField
       },
       [overTurn.fulfilled]: (state) => {
 

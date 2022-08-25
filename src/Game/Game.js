@@ -47,7 +47,7 @@ export class Game {
                 if (value > this.maxValueOnField) {
                     const dif = this.minValue - this.maxValueOnField
                     this.maxValueOnField = value
-                    if(this.maxValueOnField >= 9 && this.maxValue === 8) {
+                    if(this.maxValueOnField >= 11 && this.maxValue === 8) {
                         this.maxValue += 1
                         this.minValue += 1
                         this.diamonds += 30
@@ -84,7 +84,7 @@ export class Game {
     }
     restart() {
         this.minValue = 1
-        this.maxValue = 8   
+        this.maxValue = 8 
         this.field = new Field(this.cellSize, this.minValue, this.maxValue)
         this.maxValueOnField = 8
         this.score = 0
@@ -130,7 +130,6 @@ export class Game {
             const newValue = this.#getNewValue(turnScore)
             this.score += turnScore
             this.field.markForDeleting(visitedCells, newValue)
-            this.isGameOver = this.field.isAnyMoveAvalable()
             this.#isNewLevel(newValue)
             if (visitedCells.length > 5) {
                     this.diamonds += diamondBonusForLength
@@ -138,9 +137,12 @@ export class Game {
         }
         this.path.clearPath()  
     }
-    toNextStep() {
+    dropDownCells() {
         this.field.dropDown()
+    }
+    synchronizeCellandField () {
         this.field.update()
+        this.isGameOver = !this.field.isAnyMoveAvalable()
     }
     destroyCell(cell) {
         cell = this.field.getCell(cell.x, cell.y)

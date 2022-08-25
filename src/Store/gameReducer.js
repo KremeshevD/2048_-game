@@ -70,12 +70,12 @@ export const gameSlice = createSlice({
         state.isTurn = false
       },
       [toNextStep.pending]: (state) => {
-        game.field.dropDown()
+        game.dropDownCells()
         const curGame = game.render()
         state.field = curGame.field
       },
       [toNextStep.fulfilled]: (state) => {
-        game.field.update()
+        game.synchronizeCellandField()
         const curGame = game.render()
         state.field = curGame.field
         state.isNewLevel = curGame.isNewLevel
@@ -83,6 +83,7 @@ export const gameSlice = createSlice({
         state.maxValue = game.maxValue
         state.minValue = game.minValue
         state.score = game.score
+        state.isGameOver = game.isGameOver
         localStorage.setItem('game', JSON.stringify(state))
       },
       [toNextStep.rejected]: (state) => {

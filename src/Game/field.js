@@ -31,9 +31,9 @@ export class Field {
     }
     isAnyMoveAvalable() {
             let res = false
-            this.field.forEach( line =>{ 
-                line.forEach( cell => {
-                    this.#dif.forEach( offset => {
+            this.field.some( line =>{ 
+                line.some( cell => {
+                    this.#dif.some( offset => {
                         let xCheck = cell.x + offset[0]
                         let yCheck = cell.y + offset[1]
                         let yAvalable = yCheck >= 0 && yCheck < this.field.length
@@ -43,11 +43,11 @@ export class Field {
                                 res =  true
                             } 
                         }
-                        if (res) return 
+                        return res
                     })
-                    if(res) return
+                    return res
                 })
-                if(res) return 
+                return res
             })
             return res
     }

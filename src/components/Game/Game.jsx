@@ -16,6 +16,7 @@ export const Game = () => {
     const diamonds = useSelector(state => state.game.diamonds)
     const isNewLevel = useSelector(state => state.game.isNewLevel)
     const newLevelData = useSelector(state => state.game.newLevelData)
+    const isGameOver = useSelector(state => state.game.isGameOver)
 
     const dispatch = useDispatch()
 
@@ -41,7 +42,8 @@ export const Game = () => {
             dispatch(overTurn())
         }
     }
-
+    if( isGameOver) console.log('Game over')
+    
     return (
         <>
         <div className="game" style={gameStyle} onPointerUp={overTurnHandler}>

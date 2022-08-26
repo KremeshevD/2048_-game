@@ -1,40 +1,25 @@
 export const parseCellFromEvent = (e) => {
-    var xcoord = e.touches? e.touches[0].pageX : e.pageX;
-    var ycoord = e.touches? e.touches[0].pageY : e.pageY;
-    let xy = e.target.getAttribute('data-xy')
-    if (xy) {
+    const isTouch = ('ontouchstart' in document.documentElement)
+    let cell
+    if(isTouch) {
+        const xcoord = e.pageX;
+        const ycoord = e.pageY;
+        cell = document.elementFromPoint(xcoord, ycoord).getAttribute('data-xy')
+    } else {
+        cell = e.target.getAttribute('data-xy')
+    }
+    if (cell) {
         let id = e.target.getAttribute('id')
-        let x = +xy[0]
-        let y = +xy[2]
+        let x = +cell[0]
+        let y = +cell[2]
         return {x, y, id}
     }
     return false
-
 }
 export const getPointerPosition = (e) => {
-    let left
-    let top
-    if(e.type === "touchmove") {
-        if(!e.target.getAttribute('data-xy')) {
-            left = e.targetTouches[0].offsetX
-            top = e.targetTouches[0].offsetY
-        } else {
-            let parentNode = e.target.parentNode
-            let parentCoordinate = parentNode.getBoundingClientRect()
-            left = Math.floor(e.targetTouches[0].clientX - parentCoordinate.left)
-            top = Math.floor(e.targetTouches[0].clientY - parentCoordinate.top)
-        }
-    } else {
-        if(!e.target.getAttribute('data-xy')) {
-            left = e.offsetX
-            top = e.offsetY
-        } else {
-            let parentNode = e.target.parentNode
-            let parentCoordinate = parentNode.getBoundingClientRect()
-            left = Math.floor(e.clientX - parentCoordinate.left)
-            top = Math.floor(e.clientY - parentCoordinate.top)
-        }
-    }
+    let coordinate = e.target.closest('.field').getBoundingClientRect()
+    let left = Math.floor(e.clientX - coordinate.left)
+    let top = Math.floor(e.clientY - coordinate.top)
     const cell = parseCellFromEvent(e)
     return {left, top, cell}
 }

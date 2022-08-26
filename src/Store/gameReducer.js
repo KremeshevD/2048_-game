@@ -6,6 +6,7 @@ import { destroyCell, overTurn, pickCellForDestroy, toNextLevel, toNextStep } fr
 
 const game = new Game(getCellSize())
 const savedGame = localStorage.getItem('game')
+
 if(savedGame) {
   game.restore(JSON.parse(savedGame))
 } 
@@ -14,7 +15,8 @@ const initialState = {
     isTurn: false,
     isSwapMode: false,
     isDestroyMode: false,
-    swapingCells: []
+    swapingCells: [],
+    isRestored: savedGame ? true:false
   }
 
 
@@ -36,6 +38,7 @@ export const gameSlice = createSlice({
             state.pathSegments = curGame.pathSegments
     },
     setSwapMode (state) {
+      
       state.isSwapMode = true
     },
     setDestroyMode(state) {
@@ -50,6 +53,9 @@ export const gameSlice = createSlice({
         const curGame = game.render()
         state.field = curGame.field
       }
+    },
+    restoreGame(state) {
+      state.isRestored = false
     }
   },
   extraReducers: {
@@ -104,6 +110,7 @@ export const gameSlice = createSlice({
       },
       [destroyCell.pending]: (state) => {
         state.isDestroyMode = false
+        state.diamonds = game.diamonds
       },
       [destroyCell.fulfilled]: (state) => {
         
@@ -115,8 +122,9 @@ export const gameSlice = createSlice({
         game.destroyCell(payload)
         const curGame = game.render()
         state.field = curGame.field
+        state.diamonds = curGame.diamonds
       }
   }
 });
 
-export const { startTurn, turnInProgress, setSwapMode, setDestroyMode, setSwapingCells } = gameSlice.actions;
+export const { startTurn, turnInProgress, setSwapMode, setDestroyMode, setSwapingCells, restoreGame } = gameSlice.actions;

@@ -3,6 +3,7 @@
     padding: 0;
     box-sizing: border-box;
     position: relative;
+    touch-action: none;
 }
 
 .transition-500 {

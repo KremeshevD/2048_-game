@@ -1,38 +1,53 @@
-import { useDispatch } from "react-redux"
+import { useMemo } from "react"
+import { useDispatch, useSelector } from "react-redux"
 import { setDestroyMode, setSwapMode } from "../../../Store/gameReducer"
 import { ButtonCustom } from "./ButtonCustom"
 
 
 export const ButtonBlock = () => {
         const dispatch = useDispatch()
-        const swapModeHandler = () => {
-            dispatch(setSwapMode())
-        }
-        const removeModeHandler = () => {
-            dispatch(setDestroyMode())
-        }
-        const restartHandler = () => {
+        const bonusCost = useSelector(state => state.game.bonusCost)
+        const diamonds = useSelector(state => state.game.diamonds)
 
-        }
-        const swapButton = {
+        const swapButton = useMemo(() => {
+            return {
             text: "Swap",
-            class: "swap",
-            cost: 100,
-        }
-        const removeButton = {
+            style: "swap",
+            disabled: diamonds<bonusCost,
+            cost: bonusCost,
+            id: 1+Date.now(),
+            handler: () => {
+                dispatch(setSwapMode())
+            }
+         }
+        },[bonusCost, diamonds])
+        const removeButton = useMemo(() => {return{
             text: "destroy",
-            class: "destroy",
-            cost: 100,
+            style: "destroy",
+            disabled: diamonds<bonusCost,
+            cost: bonusCost,
+            id: 10+Date.now(),
+            handler: () => {
+                dispatch(setDestroyMode())
+            }
         }
-        const restartButton = {
+        },[bonusCost,diamonds])
+
+        const restartButton = useMemo(() => {
+            return {
             text: "Restart",
-            class: "restart",
-        }
+            style: "restart",
+            id: 20+Date.now(),
+            handler: () => {
+
+            }
+            }
+        },[])
+    const buttons = [swapButton, removeButton, restartButton]
  return (
         <div className="buttonBlock">
-                    <ButtonCustom handler={swapModeHandler} content = {swapButton}></ButtonCustom>
-                    <ButtonCustom handler={removeModeHandler} content = {removeButton}></ButtonCustom>
-                    <ButtonCustom handler={restartHandler} content = {restartButton}></ButtonCustom>
+                    {buttons.map( button => <ButtonCustom {...button} key={button.id}/>)}
+
 
         </div>
     )

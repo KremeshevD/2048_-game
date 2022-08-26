@@ -1,8 +1,8 @@
-export const ButtonCustom =  ({handler, content}) => {
+export const ButtonCustom =  ({ text, handler, style, disabled, cost }) => {
     return (
         <div className="">
-            <button className={content.class} onClick = {handler}>{content.text}</button>
-            {content.cost && <span>{content.cost}</span>}
+            <button className={style} onClick = {handler} disabled={disabled}>{text}</button>
+            {cost && <span>{cost}</span>}
         </div>
     )
 }

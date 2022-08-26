@@ -19,6 +19,7 @@ export class Game {
         this.isGameOver = false
         this.isNewLevel = false
         this.newLevelData = {}
+        this.bonusCost = 100
     }
 
     #getNewValue(value) {
@@ -51,6 +52,8 @@ export class Game {
                         this.maxValue += 1
                         this.minValue += 1
                         this.diamonds += 30
+                        this.isNewLevel = true
+                        this.bonusCost +=15 
                         this.newLevelData = {
                             newValue: this.maxValue,
                             removedValue: this.minValue - 1,
@@ -61,7 +64,8 @@ export class Game {
                         this.maxValue += 1
                         this.minValue += 1   
                         this.diamonds += 30+this.maxValue-7
-                        this.isNewLevel = true  
+                        this.isNewLevel = true 
+                        this.bonusCost +=15 
                         this.newLevelData = {
                             newValue: this.maxValue,
                             removedValue: this.minValue - 1,
@@ -71,6 +75,7 @@ export class Game {
                         this.maxValue += dif
                         this.minValue += dif  
                         this.diamonds += 30+this.maxValue-7
+                        this.bonusCost +=15
                         this.isNewLevel = true 
                         this.newLevelData = {
                             newValue: this.maxValue,
@@ -145,13 +150,19 @@ export class Game {
         this.isGameOver = !this.field.isAnyMoveAvalable()
     }
     destroyCell(cell) {
-        cell = this.field.getCell(cell.x, cell.y)
-        this.field.markForDeleting([cell])
+        if(this.diamonds >= this.bonusCost){
+            cell = this.field.getCell(cell.x, cell.y)
+            this.diamonds -= this.bonusCost
+            this.field.markForDeleting([cell])
+        }  
     }
     swapCells([c1, c2]) {
-        const cell1 = this.field.getCell(c1.x, c1.y)
-        const cell2 = this.field.getCell(c2.x, c2.y)
-        this.field.swapCells(cell1, cell2)
+        if(this.diamonds >= this.bonusCost){
+            const cell1 = this.field.getCell(c1.x, c1.y)
+            const cell2 = this.field.getCell(c2.x, c2.y)
+            this.diamonds -= this.bonusCost
+            this.field.swapCells(cell1, cell2)
+        }
     }
     render() {
        return  {
@@ -164,6 +175,7 @@ export class Game {
             isNewLevel: this.isNewLevel,
             isGameOver: this.isGameOver,
             newLevelData: this.newLevelData, 
+            bonusCost: this.bonusCost,
             ...this.path.render(),
             ...this.field.render(),
 
@@ -178,6 +190,7 @@ export class Game {
         this.maxValueOnField = state.maxValueOnField
         this.score = state.score
         this.diamonds = state.diamonds
+        this.bonusCost = state.bonusCost
         this.newLevel = false
         this.levelInfo = {}
         this.score = state.score

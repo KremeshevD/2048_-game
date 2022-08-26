@@ -14,7 +14,7 @@ export class Cell {
         this.isDeleted = false
     }
     #setColor() {
-        const colors = ['red', 'green', 'Lime', 'blue', 'pink' ,'brown', 'Chartreuse', 'Aquamarine', 'purple','violet', 'yellow' ]
+        const colors = ['red', 'green', 'orange', 'blue', 'pink', 'yellow' ,'brown', 'Chartreuse', 'Aquamarine', 'purple','violet', 'GoldenRod', 'LightCyan' ]
         this.color = colors[this._value%colors.length]
     }
     set value(newValue) {

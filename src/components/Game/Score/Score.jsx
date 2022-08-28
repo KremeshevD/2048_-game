@@ -1,24 +1,7 @@
-import { useEffect, useState } from "react"
+import { useAnimatedCounter } from "../../../Hooks/useAnimatedCounter"
 
 export const Score = ({score}) => {
-    const [scoreCount, setScoreCount] = useState(score)
-    const [scoreOffset, setScoreOffset] =  useState(0)
-    useEffect(() => {
-        setScoreOffset(Math.ceil((score-scoreCount)/5))
-    },[score])
-
-    useEffect(() => {
-        if(scoreCount >= score ) {
-            setScoreOffset(0)
-            setScoreCount(score)
-        }  else {
-            setTimeout(()=> {
-                setScoreCount(scoreCount+scoreOffset)
-            }, 100)
-        }
-    },[scoreOffset, scoreCount])
-
-
+    let scoreCount = useAnimatedCounter(score, 5, 50)
     return (
         <>
         <div>Best Score: {scoreCount}</div>

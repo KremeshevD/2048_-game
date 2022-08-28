@@ -136,3 +136,16 @@ div {
     align-items: stretch;
     flex-direction: column;
 }
+
+/*Header==========================================================*/
+.diamondBlock {
+    display: flex;
+    font-size: 1,5rem;
+    font-weight: 500 ;
+}
+.diamond {
+    width: 1rem;
+    background-image: url(/public/img/diamond.svg);
+    background-repeat: no-repeat;
+
+}

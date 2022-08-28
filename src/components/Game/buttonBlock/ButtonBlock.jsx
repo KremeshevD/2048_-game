@@ -10,7 +10,6 @@ export const ButtonBlock = () => {
 
   const swapButton = useMemo(() => {
     return {
-      text: 'Swap',
       style: 'swap',
       disabled: diamonds < bonusCost,
       cost: bonusCost,
@@ -22,7 +21,6 @@ export const ButtonBlock = () => {
   }, [bonusCost, diamonds]);
   const removeButton = useMemo(() => {
     return {
-      text: 'destroy',
       style: 'destroy',
       disabled: diamonds < bonusCost,
       cost: bonusCost,
@@ -35,7 +33,6 @@ export const ButtonBlock = () => {
 
   const restartButton = useMemo(() => {
     return {
-      text: 'Restart',
       style: 'restart',
       id: 20 + Date.now(),
       handler: () => {

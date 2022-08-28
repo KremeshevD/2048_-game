@@ -1,10 +1,10 @@
 export const ButtonCustom = ({ text, handler, style, disabled, cost }) => {
   return (
-    <div className="">
-      <button className={style} onClick={handler} disabled={disabled}>
+    <div className="bonus">
+      <button className={`bonus-btn ${style}`} onClick={handler} disabled={disabled}>
         {text}
       </button>
-      {cost && <span>{cost}</span>}
+      {cost && <span className="bonusPrice">{cost}</span>}
     </div>
   );
 };

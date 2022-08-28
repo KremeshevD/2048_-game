@@ -1,9 +1,7 @@
 import './game.css'
 import { useDispatch, useSelector } from "react-redux"
 import { overTurn } from '../../Store/asyncAction'
-import { StartScreen } from './StartScreen'
-import getCellSize from '../../Hooks/getCellSize'
-import { useRef } from 'react'
+import { StartScreen } from './StartScreen' 
 import { Header } from './Header'
 import { GameField } from './GameField/GameField'
 import { NewLevel } from './NewLevel'
@@ -11,7 +9,6 @@ import useCellSize from '../../Hooks/useCellSize'
 
 export const Game = () => {
     useCellSize()
-    let cellSize = useRef(getCellSize()).current
     const isTurn = useSelector(state => state.game.isTurn)
     const isNewLevel = useSelector(state => state.game.isNewLevel)
     const isGameOver = useSelector(state => state.game.isGameOver)
@@ -19,11 +16,6 @@ export const Game = () => {
 
     const dispatch = useDispatch()
 
-
-    const gameStyle = {
-        minWidth: cellSize*6.2+'rem',
-        minHeight: cellSize*11.4+'rem',
-    }
     const overTurnHandler = () => {
         if(isTurn) {
             dispatch(overTurn())
@@ -33,7 +25,7 @@ export const Game = () => {
     
     return (
         <>
-        <div className="game" style={gameStyle} onPointerUp={overTurnHandler}>
+        <div className="game" onPointerUp={overTurnHandler}>
             <Header />
             {isRestored ?
             <StartScreen/>

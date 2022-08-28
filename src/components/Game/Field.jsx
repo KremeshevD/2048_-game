@@ -6,17 +6,12 @@ import { Cell } from "./Cell"
 import { PathSegment } from "./PathSegment"
 
 export const Field = () => {
-    const cellSize = useSelector( state => state.game.cellSize)
     const field = useSelector(state => state.game.field)
     const pathSegments = useSelector(state => state.game.pathSegments)
     const isSwapMode = useSelector(state => state.game.isSwapMode)
     const isDestroyMode = useSelector(state => state.game.isDestroyMode)
     const swapingCells = useSelector( state => state.game.swapingCells)
     const maxValueOnField = useSelector( state => state.game.maxValueOnField)
-    const fieldStyle = {
-        width: cellSize*5.8+'rem',
-        height: cellSize*9.4+'rem',
-    }
 
     const dispatch = useDispatch()
     const pointerDownHandler = (e) => {
@@ -35,7 +30,7 @@ export const Field = () => {
     }
    return ( 
 
-                <div className="field" style={fieldStyle}>
+                <div className="field">
                     {field.map(cell => <Cell 
                         cell={cell} 
                         top={cell.top}

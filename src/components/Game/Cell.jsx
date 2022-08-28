@@ -3,10 +3,10 @@ import { getValueForDisplay } from '../../Utils/getValueForDisplay';
 export const Cell = ({ cell, onPointerDown, top, onClick, isSwaping, maxValueOnField }) => {
   let isMax = cell.value > 7 && maxValueOnField === cell.value;
   let style = {
-    top: top,
-    width: cell.size,
-    left: cell.left,
-    height: cell.size,
+    top: top+'rem',
+    width: cell.size+'rem',
+    left: cell.left+'rem',
+    height: cell.size+'rem',
     backgroundColor: cell.color,
   };
   let classes = 'cell';

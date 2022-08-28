@@ -1,11 +1,12 @@
 
 
 export const PathSegment = ({pathSegment}) => {
+    console.log(pathSegment)
     let style = {
-        top: pathSegment.ys,
-        width: pathSegment.length,
-        left: pathSegment.xs,
-        height: 5,
+        top: pathSegment.ys + 'rem',
+        width: pathSegment.length + 'rem',
+        left: pathSegment.xs + 'rem',
+        height: pathSegment.height + 'rem',
         backgroundColor: pathSegment.color,
         transform: `rotate(${pathSegment.angle}deg)`
     }

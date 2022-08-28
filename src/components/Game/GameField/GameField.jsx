@@ -13,11 +13,11 @@ export const GameField = () => {
 
 
     const gameFieldStyle = {
-        width: cellSize*5.8
+        width: cellSize*5.8+'rem'
     }
     const lineStyle = {
-        marginTop: cellSize*0.2,
-        marginBottom: cellSize*0.2
+        marginTop: cellSize*0.2+'rem',
+        marginBottom: cellSize*0.2+'rem'
     }
     const moveHandler = (e) => {
         if (isTurn){

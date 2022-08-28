@@ -1,13 +1,12 @@
-import { createSlice, current } from '@reduxjs/toolkit'
+import { createSlice } from '@reduxjs/toolkit'
 import { Game } from '../Game/Game'
-import getCellSize from '../Hooks/getCellSize'
 import { destroyCell, overTurn, pickCellForDestroy, toNextLevel, toNextStep } from './asyncAction'
 
-const game = new Game(getCellSize())
+const game = new Game(5)
 let savedGame = localStorage.getItem('game')
 
 if (savedGame) {
-  let cellSize = getCellSize()
+  let cellSize = 5
   savedGame = JSON.parse(savedGame)
   savedGame.cellSize = cellSize
   game.restore(savedGame)

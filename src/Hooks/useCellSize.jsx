@@ -1,4 +1,5 @@
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from "react";
+
 function getWindowDimensions() {
   const { innerWidth: width, innerHeight: height } = window;
   return {
@@ -18,5 +19,9 @@ export default function useCellSize() {
   const cellH = Math.floor(windowDimensions.height/11.8)
   const cellW = Math.floor(windowDimensions.width/6.2)
   let cellSize = cellH > cellW ? cellW : cellH 
-  return cellSize;
+  const html  = document.querySelector('html')
+  html.style.fontSize = cellSize/5+'px'
+  return 5;
 }
+
+

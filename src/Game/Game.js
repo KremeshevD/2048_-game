@@ -98,7 +98,6 @@ export class Game {
     this.newLevel = false;
     this.levelInfo = {};
     this.isGameOver = false;
-    console.log('restart')
   }
   toNextLvl() {
     this.field.setValueRange(this.minValue, this.maxValue);

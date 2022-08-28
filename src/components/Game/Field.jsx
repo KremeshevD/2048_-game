@@ -14,8 +14,8 @@ export const Field = () => {
     const swapingCells = useSelector( state => state.game.swapingCells)
     const maxValueOnField = useSelector( state => state.game.maxValueOnField)
     const fieldStyle = {
-        width: cellSize*5.8,
-        height: cellSize*9.4,
+        width: cellSize*5.8+'rem',
+        height: cellSize*9.4+'rem',
     }
 
     const dispatch = useDispatch()

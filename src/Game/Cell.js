@@ -1,3 +1,5 @@
+import { COLORS } from "./config"
+
 export class Cell {
     constructor({value, x, y, size}) {
         this._value = value
@@ -14,8 +16,7 @@ export class Cell {
         this.isDeleted = false
     }
     #setColor() {
-        const colors = ['red', 'green', 'orange', 'blue', 'pink', 'yellow' ,'brown', 'Chartreuse', 'Aquamarine', 'purple','violet', 'GoldenRod', 'LightCyan' ]
-        this.color = colors[this._value%colors.length]
+        this.color = COLORS[this._value%COLORS.length]
     }
     set value(newValue) {
             if (newValue > this.value) {

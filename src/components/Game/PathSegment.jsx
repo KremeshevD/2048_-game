@@ -1,7 +1,6 @@
 
 
 export const PathSegment = ({pathSegment}) => {
-    console.log(pathSegment)
     let style = {
         top: pathSegment.ys + 'rem',
         width: pathSegment.length + 'rem',

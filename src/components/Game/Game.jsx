@@ -6,6 +6,7 @@ import { Header } from './Header'
 import { GameField } from './GameField/GameField'
 import { NewLevel } from './NewLevel'
 import useCellSize from '../../Hooks/useCellSize'
+import { Restart } from './Restart'
 
 export const Game = () => {
     useCellSize()
@@ -13,6 +14,7 @@ export const Game = () => {
     const isNewLevel = useSelector(state => state.game.isNewLevel)
     const isGameOver = useSelector(state => state.game.isGameOver)
     const isRestored = useSelector(state => state.game.isRestored)
+    const isRestartMode = useSelector(state => state.game.isRestartMode)
 
     const dispatch = useDispatch()
 
@@ -34,6 +36,7 @@ export const Game = () => {
             }
         </div>
         {isNewLevel && <NewLevel />}
+        {isRestartMode && <Restart />}
         </>
     )
 }

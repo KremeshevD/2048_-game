@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { isRestartMode, setDestroyMode, setSwapMode } from '../../../Store/gameReducer';
+import { restartMode, setDestroyMode, setSwapMode } from '../../../Store/gameReducer';
 import { ButtonCustom } from './ButtonCustom';
 
 export const ButtonBlock = () => {
@@ -36,7 +36,7 @@ export const ButtonBlock = () => {
       style: 'restart',
       id: 20 + Date.now(),
       handler: () => {
-        dispatch(isRestartMode())
+        dispatch(restartMode())
       },
     };
   }, []);

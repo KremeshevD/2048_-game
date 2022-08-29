@@ -14,7 +14,7 @@ export class Game {
     this.diamonds = 0;
     this.path = new Path();
     this.newLevel = false;
-    this.levelInfo = {}; 
+    this.levelInfo = {};
     this.score = 0;
     this.isGameOver = false;
     this.isNewLevel = false;
@@ -49,7 +49,7 @@ export class Game {
     if (value > this.maxValueOnField) {
       const dif = this.minValue - this.maxValueOnField;
       this.maxValueOnField = value;
-      if (this.maxValueOnField >= 11 && this.maxValue === 8) {
+      if (this.maxValueOnField >= 9 && this.maxValue === 8) {
         this.maxValue += 1;
         this.minValue += 1;
         this.diamonds += 30;
@@ -88,16 +88,67 @@ export class Game {
       this.newLevel = false;
     }
   }
-  restart() {
-    this.minValue = 1;
-    this.maxValue = 8;
-    this.field = new Field(this.cellSize, this.minValue, this.maxValue);
-    this.maxValueOnField = 8;
-    this.score = 0;
-    this.path = new Path();
-    this.newLevel = false;
-    this.levelInfo = {};
-    this.isGameOver = false;
+  generateCostStartBlock() {
+    let i = 0;
+    let cost = 0;
+    let priceList = [
+      {
+        value: 1,
+        price: 0,
+      },
+    ];
+    while (cost < this.diamonds) {
+      if (i === 0) {
+        priceList.push({
+          value: 20,
+          price: 500,
+        });
+        cost = 500;
+      } else {
+        priceList.push({
+          value: 20 + i,
+          price: 1000 + (i - 1) * 100,
+        });
+      }
+      i++;
+      cost = 1000 + (i - 1) * 100;
+    }
+    return priceList;
+  }
+  #isStartBlockAvalaible(value) {
+    console.log(this.diamonds);
+    let res = false;
+    if (value === 1) {
+      res = true;
+    } else if (value <= 20) {
+      if (this.diamonds > 500) {
+        this.diamonds -= 500;
+        res = true;
+      }
+    } else if (value > 20) {
+      console.log('nen');
+      let cost = 1000 + (value - 21) * 100;
+      if (this.diamonds > cost) {
+        this.diamonds -= cost;
+        res = true;
+      }
+    }
+    return res;
+  }
+  restart(startValue = 1) {
+    startValue = parseInt(startValue);
+    if (this.#isStartBlockAvalaible(startValue)) {
+      console.log(startValue);
+      this.minValue = startValue;
+      this.maxValue = this.minValue + 7;
+      this.field = new Field(this.cellSize, this.minValue, this.maxValue);
+      this.maxValueOnField = this.maxValue;
+      this.score = 0;
+      this.path = new Path();
+      this.newLevel = false;
+      this.levelInfo = {};
+      this.isGameOver = false;
+    }
   }
   toNextLvl() {
     this.field.setValueRange(this.minValue, this.maxValue);

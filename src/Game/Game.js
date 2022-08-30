@@ -107,7 +107,7 @@ export class Game {
           isSelected: false
         });
       } else {
-        price = 1000 + (i - 1) * 100;
+        price = 1000 + (i - 1 + Math.floor((i)/5)) * 100;
         priceList.push({
           value: 20 + i,
           price,
@@ -115,6 +115,7 @@ export class Game {
         });
       }
       i++;
+      price = 1000 + (i - 1 + Math.floor((i)/5)) * 100;
     }
     return priceList;
   }

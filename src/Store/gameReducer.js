@@ -38,11 +38,12 @@ export const gameSlice = createSlice({
       state.pathSegments = curGame.pathSegments;
     },
     setSwapMode(state) {
-      state.isSwapMode = true;
+      state.isSwapMode = !state.isSwapMode;
+      state.selectedCells = [];
       state.isGameOver = false;
     },
     setDestroyMode(state) {
-      state.isDestroyMode = true;
+      state.isDestroyMode = !state.isDestroyMode;
       state.isGameOver = false;
     },
     setSwapingCells(state, { payload }) {
@@ -60,8 +61,8 @@ export const gameSlice = createSlice({
       state.isGameOver = false;
     },
     restartMode(state) {
-      state.avalableBlocks = game.generateCostStartBlock();
-      state.isRestartMode = true;
+      state.isRestartMode = !state.isRestartMode;
+      state.avalableBlocks = state.isRestartMode? game.generateCostStartBlock() : [];
     },
     startNewGame(state, { payload }) {
       game.restart(payload);
@@ -73,7 +74,7 @@ export const gameSlice = createSlice({
       state.score = curGame.score;
       state.diamonds = curGame.diamonds;
       state.maxValueOnField = curGame.maxValueOnField;
-      state.bonusCost = curGame.bonusCost
+      state.bonusCost = curGame.bonusCost;
       state.isDestroyMode = false;
       state.isSwapMode = false;
       localStorage.setItem('game', JSON.stringify(state));
@@ -118,7 +119,7 @@ export const gameSlice = createSlice({
       state.field = curGame.field;
       state.isNewLevel = curGame.isNewLevel;
       state.newLevelData = curGame.newLevelData;
-      state.bonusCost = curGame.bonusCost
+      state.bonusCost = curGame.bonusCost;
     },
     [toNextLevel.fulfilled]: (state) => {},
     [toNextLevel.rejected]: (state) => {

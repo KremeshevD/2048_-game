@@ -1,10 +1,11 @@
-export const ButtonCustom = ({ text, handler, style, disabled, cost }) => {
+export const ButtonCustom = ({ text, handler, style, disabled, cost, isOn }) => {
+  let classes = ['bonus-btn', style, isOn ? 'cancel' : '']
   return (
     <div className="bonus">
-      <button className={`bonus-btn ${style}`} onClick={handler} disabled={disabled}>
+      <button className={classes.join(' ')} onClick={handler} disabled={disabled}>
         {text}
       </button>
-      {cost && <span className="bonusPrice">{cost}</span>}
+      {(cost && !isOn) && <span className="bonusPrice">{cost}</span>}
     </div>
   );
 };

@@ -8,7 +8,7 @@ export const overTurn = createAsyncThunk (
                 setTimeout(() => {
                     dispatch(toNextStep())
                     res()
-                }, 300)
+                }, 280)
             })
             await delay
             return 
@@ -23,7 +23,7 @@ export const toNextStep = createAsyncThunk(
     async (_, {rejectWithValue}) => {
         try { 
             const delay = new Promise((res, rej) => {
-                setTimeout(() => res(), 300)
+                setTimeout(() => res(), 280)
             })
             await delay
             return 
@@ -41,7 +41,7 @@ export const toNextLevel = createAsyncThunk (
                 setTimeout(() => {
                     dispatch(toNextStep())
                     res()
-                }, 300)
+                }, 280)
             })
             await delay
             return 
@@ -60,7 +60,7 @@ export const destroyCell = createAsyncThunk (
                 setTimeout(() => {
                     dispatch(toNextStep())
                     res()
-            }, 300)
+            }, 280)
             })
             await delay
             return 

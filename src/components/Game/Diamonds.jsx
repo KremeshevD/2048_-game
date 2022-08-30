@@ -1,7 +1,9 @@
+import { useSelector } from "react-redux";
 import { useAnimatedCounter } from "../../Hooks/useAnimatedCounter";
 
-export const Diamonds = ({ value }) => {
-  const diamonds  = useAnimatedCounter(value, 3, 50)
+export const Diamonds = () => {
+  const diamondQty = useSelector(state => state.game.diamonds)
+  const diamonds  = useAnimatedCounter(diamondQty, 3, 50)
   return (
     <div className="info">
       <div className="diamond" />

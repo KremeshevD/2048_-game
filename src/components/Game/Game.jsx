@@ -7,6 +7,7 @@ import { GameField } from './GameField/GameField'
 import { NewLevel } from './NewLevel'
 import useCellSize from '../../Hooks/useCellSize'
 import { Restart } from './Restart'
+import { GameOver } from './GameOver'
 
 export const Game = () => {
     useCellSize()
@@ -37,6 +38,7 @@ export const Game = () => {
         </div>
         {isNewLevel && <NewLevel />}
         {isRestartMode && <Restart />}
+        {isGameOver && <GameOver />}
         </>
     )
 }

@@ -10,7 +10,7 @@ export const Field = () => {
     const pathSegments = useSelector(state => state.game.pathSegments)
     const isSwapMode = useSelector(state => state.game.isSwapMode)
     const isDestroyMode = useSelector(state => state.game.isDestroyMode)
-    const swapingCells = useSelector( state => state.game.swapingCells)
+    const selectedCells = useSelector( state => state.game.selectedCells)
     const maxValueOnField = useSelector( state => state.game.maxValueOnField)
 
     const dispatch = useDispatch()
@@ -37,7 +37,7 @@ export const Field = () => {
                         key={cell.id} 
                         onPointerDown={pointerDownHandler}
                         onClick = {bonusModeHandler}
-                        isSwaping = {swapingCells.filter( spaingCell => spaingCell.id === cell.id).length ? true : false}
+                        isSelected = {selectedCells.filter( selectedCell => selectedCell.id === cell.id).length ? true : false}
                         className="cell"
                         maxValueOnField = {maxValueOnField}
                         /> )}

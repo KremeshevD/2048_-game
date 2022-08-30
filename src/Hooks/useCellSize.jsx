@@ -16,7 +16,7 @@ export default function useCellSize() {
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []); 
-  const cellH = Math.floor(windowDimensions.height/11.8)
+  const cellH = Math.floor(windowDimensions.height/12)
   const cellW = Math.floor(windowDimensions.width/6.2)
   let cellSize = cellH > cellW ? cellW : cellH 
   const html  = document.querySelector('html')

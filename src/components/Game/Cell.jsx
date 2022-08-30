@@ -1,7 +1,7 @@
 import { COLORS } from '../../Game/config';
-import { getValueForDisplay } from '../../Utils/getValueForDisplay';
+import { pow2StringNumber } from '../../Utils/getValueForDisplay';
 
-export const Cell = ({ cell, onPointerDown, top, onClick, isSwaping, maxValueOnField, isBig }) => {
+export const Cell = ({ cell, onPointerDown, top, onClick, isSelected, maxValueOnField, isBig }) => {
   let isMax = cell.value > 7 && maxValueOnField === cell.value;
   let style = cell.top !== undefined ? {
     top: top+'rem',
@@ -13,13 +13,13 @@ export const Cell = ({ cell, onPointerDown, top, onClick, isSwaping, maxValueOnF
   };
   let classes = 'cell';
   classes += cell.isVisited ? ' pick' : '';
-  classes += isSwaping ? ' swapingCell' : '';
+  classes += isSelected ? ' selectedCell' : '';
   classes += cell.isUnited ? ' unite' : '';
   classes += cell.isDeleted ? ' deletedCell' : '';
   classes += isMax ? ' maxValue' : '';
   classes += isBig ? ' bigCell' : ''
 
-  const value = getValueForDisplay(cell.value);
+  const value = pow2StringNumber(cell.value);
 
   return (
     <div

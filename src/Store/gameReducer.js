@@ -17,7 +17,7 @@ const initialState = {
   isSwapMode: false,
   isDestroyMode: false,
   isRestartMode: false,
-  swapingCells: [],
+  selectedCells: [],
   isRestored: savedGame ? true : false,
 };
 
@@ -39,22 +39,25 @@ export const gameSlice = createSlice({
     },
     setSwapMode(state) {
       state.isSwapMode = true;
+      state.isGameOver = false;
     },
     setDestroyMode(state) {
       state.isDestroyMode = true;
+      state.isGameOver = false;
     },
     setSwapingCells(state, { payload }) {
-      state.swapingCells = [...state.swapingCells, payload];
-      if (state.swapingCells.length === 2) {
+      state.selectedCells = [...state.selectedCells, payload];
+      if (state.selectedCells.length === 2) {
         state.isSwapMode = false;
-        game.swapCells(state.swapingCells);
-        state.swapingCells = [];
+        game.swapCells(state.selectedCells);
+        state.selectedCells = [];
         const curGame = game.render();
         state.field = curGame.field;
       }
     },
     restoreGame(state) {
       state.isRestored = false;
+      state.isGameOver = false;
     },
     restartMode(state) {
       state.avalableBlocks = game.generateCostStartBlock();

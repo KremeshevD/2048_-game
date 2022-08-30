@@ -90,33 +90,35 @@ export class Game {
   }
   generateCostStartBlock() {
     let i = 0;
-    let cost = 0;
+    let price = 0;
     let priceList = [
       {
         value: 1,
         price: 0,
+        isSelected: true
       },
     ];
-    while (cost < this.diamonds) {
+    price = 500;
+    while (price < this.diamonds) {
       if (i === 0) {
         priceList.push({
           value: 20,
-          price: 500,
+          price,
+          isSelected: false
         });
-        cost = 500;
       } else {
+        price = 1000 + (i - 1) * 100;
         priceList.push({
           value: 20 + i,
-          price: 1000 + (i - 1) * 100,
+          price,
+          isSelected: false
         });
       }
       i++;
-      cost = 1000 + (i - 1) * 100;
     }
     return priceList;
   }
   #isStartBlockAvalaible(value) {
-    console.log(this.diamonds);
     let res = false;
     if (value === 1) {
       res = true;

@@ -2,7 +2,7 @@
   display: flex;
   align-items: center;
   flex-direction: column;
-  justify-content: stretch;
+  justify-content: center;
   align-items: center;
   min-width: 31rem;
   min-height: 57rem;
@@ -79,10 +79,10 @@
   animation: pickCell 0.3s linear;
 }
 
-.swapingCell {
+.selectedCell {
   transition: all 0.1s;
 }
-.swapingCell::before {
+.selectedCell::before {
   content: '';
   position: absolute;
   top: -0.25rem;
@@ -94,7 +94,7 @@
 }
 
 .unite {
-  animation: uniteCell 0.3s ease-in-out;
+  animation: uniteCell 0.3s ease-in-out 1;
   z-index: 4;
 }
 
@@ -141,6 +141,12 @@
   background-color: lightgreen;
   color: white;
   border-radius: 1rem;
+  transition: 0.4s;
+}
+.btn-big:hover {
+  background-color: #397524;
+  transition: 0.4s;
+  color: red
 }
 .fullwide {
   width: 100%;
@@ -319,29 +325,66 @@
   justify-content: center;
   border: 2px solid darkgray;
   border-radius: 2rem;
+  padding: 1rem;
 }
 
 /*Carousel===========================================================*/
 
 .carousel {
-    height: 10rem;
+    height: 8rem;
     overflow: scroll;
     overflow-y: hidden  ;
     display: flex;
     align-items: center;
     gap: 2rem;
     flex-wrap: nowrap;
+    touch-action: auto;
+    padding-left: 4rem;
+    width: 100%;
+    padding-top: 0.5rem;
+}
+.carouselItem {
+  align-self: flex-start;
 }
 .carousel::-webkit-scrollbar {
-    height: 0.5rem;
-    background-color: black;
+  height: 1rem;
+  background-color: black;
+  box-sizing: border-box;
 }
 .carousel::-webkit-scrollbar-track {
-    border-radius: 50%;
-    height: 1rem;
-  }
+  background: blue;
+  border-top: 0.45rem solid black;
+  border-bottom: 0.45rem solid black
+}
+
 .carousel::-webkit-scrollbar-thumb {
     width: 3rem;
+    height: 0.5rem;
     border-radius: 0.5rem;
-    background-color: #397524;
+    background-color: red;
+  }
+
+  /*restartWindow===================================================================*/
+
+  .restartWindow {
+    height: 100%;
+  }
+  .column {
+    display: flex;
+    justify-content: space-around ;
+    align-items: center;
+    flex-direction: column;
+    max-width: 100%;
+    height: 100%;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+  }
+
+  /*newLevelWindow===============================================*/
+  .newLevelWindow {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center ;
+    gap: 2rem;
   }

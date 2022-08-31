@@ -1,0 +1,5 @@
+.pathSegment {
+    position: absolute;
+    z-index: 1;
+    transform-origin: center left;
+  }

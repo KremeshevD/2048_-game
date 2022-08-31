@@ -60,7 +60,7 @@ export const gameSlice = createSlice({
       state.isRestored = false;
       state.isGameOver = false;
     },
-    restartMode(state) {
+    setRestartMode(state) {
       state.isRestartMode = !state.isRestartMode;
       state.avalableBlocks = state.isRestartMode? game.generateCostStartBlock() : [];
     },
@@ -149,6 +149,6 @@ export const {
   setDestroyMode,
   setSwapingCells,
   restoreGame,
-  restartMode,
+  setRestartMode,
   startNewGame,
 } = gameSlice.actions;

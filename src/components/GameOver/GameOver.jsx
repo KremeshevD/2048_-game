@@ -1,5 +1,5 @@
-import { ButtonBlock } from "./buttonBlock/ButtonBlock"
-import { ModalWindow } from "./ModalWindow"
+import { ButtonBlock } from "../ButtonBlock/ButtonBlock"
+import { ModalWindow } from "../ModalWindow/ModalWindow"
 
 export const GameOver = () => {
        return (

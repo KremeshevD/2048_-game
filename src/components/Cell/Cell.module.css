@@ -1,0 +1,86 @@
+  .cell {
+    border-radius: 10%;
+    user-select: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2;
+    transition: all 0.4s linear;
+    flex-direction: column;
+    color: white;
+    cursor: pointer;
+    font-size: 1.5rem;
+    width: 5rem;
+    height: 5rem;
+    flex-shrink: 0;
+  }
+  
+  .bigCell {
+    width: 6rem;
+    height: 6rem;
+    font-size: 1.75rem;
+    transition: none;
+  }
+  
+  .maxValue::before {
+    content: '\1F451';
+    position: absolute;
+    top: -0.1em;
+  }
+  
+  .pick {
+    animation: pickCell 0.3s linear;
+  }
+  
+  .selectedCell {
+    transition: all 0.1s;
+  }
+  .selectedCell::before {
+    content: '';
+    position: absolute;
+    top: -0.25rem;
+    left: -0.25rem;
+    height: 5.1rem;
+    width: 5.1rem;
+    border-radius: 10%;
+    border: dashed 0.2rem orange;
+  }
+  
+  .unite {
+    animation: uniteCell 0.3s ease-in-out 1;
+    z-index: 4;
+  }
+  
+  .deletedCell {
+    transition: all 0.3s linear;
+    z-index: 5;
+    animation: deletingCell 0.3s linear;
+  }
+  
+  @keyframes pickCell {
+    0% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.1);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+  @keyframes uniteCell {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+  @keyframes deletingCell {
+    0% {
+      transform: scale(1);
+    }
+    100% {
+      transform: scale(0);
+    }
+  }

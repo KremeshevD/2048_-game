@@ -1,9 +1,10 @@
 import { useMemo, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { restartMode, startNewGame } from '../../Store/gameReducer';
-import { Carousel } from './Carousel';
-import { Diamonds } from './Diamonds';
-import { ModalWindow } from './ModalWindow';
+import { setRestartMode, startNewGame } from '../../Store/gameReducer';
+import { Carousel } from '../Carousel/Carousel';
+import { Diamonds } from '../Diamonds/Diamonds';
+import { ModalWindow } from '../ModalWindow/ModalWindow';
+import s from './Restart.module.css'
 
 export const Restart = () => {
   const [selectedBlock, setSelectedBlock] = useState(1);
@@ -21,17 +22,17 @@ export const Restart = () => {
   };
   return (
     <ModalWindow>
-      <div className="restartWindow">
-        <div className="restartWindowHeader">
+      <div className={s.restartWindow}>
+        <div className={s.restartWindowHeader}>
           <Diamonds />
-          <div className="exit" onClick={() => dispatch(restartMode())}>
+          <div className={s.exit} onClick={() => dispatch(setRestartMode())}>
             <span>X</span>
           </div>
         </div>
-        <div className="column">
+        <div className={s.column}>
           <div>Start From</div>
           <Carousel list={blocks} onClick={pickHandler} />
-          <button className="btn-big" onClick={btnHandler}>
+          <button className={s.btnBig} onClick={btnHandler}>
             &#9654;
           </button>
         </div>

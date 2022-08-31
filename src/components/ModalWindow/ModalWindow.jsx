@@ -1,8 +1,8 @@
-
+import s from './ModalWindow.module.css'
 export const ModalWindow= (props) => {
     return (
-        <div className="modal">
-            <div className="meassageBlock">
+        <div className={s.modal}>
+            <div className={s.meassageBlock}>
                 {props.children}
             </div>
         </div>

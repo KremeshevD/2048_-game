@@ -1,7 +1,8 @@
 import { useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { restartMode, restoreGame } from '../../Store/gameReducer';
-import { Cell } from './Cell';
+import { setRestartMode, restoreGame } from '../../Store/gameReducer';
+import { Cell } from '../Cell/Cell';
+import s from './StartScreen.module.css'
 
 export const StartScreen = () => {
   const dispatch = useDispatch();
@@ -14,22 +15,21 @@ export const StartScreen = () => {
       style: 'restart',
       id: 20 + Date.now(),
       handler: () => {
-        dispatch(restartMode());
+        dispatch(setRestartMode());
       },
     };
   }, []);
   return (
-    <div className="fullwide contentCenter fullheight">
-      <div className="cellArea">
-        <div className="circle">
+    <div className={s.container}>
+      <div className={s.cellArea}>
+        <div className={s.circle}>
           <Cell cell={cell} isBig={true} maxValueOnField={higestBlock}/>
         </div>
         <span>YOUR HIGEST BLOCK</span>
       </div>
-      <button className="btn-big" onClick={() => dispatch(restoreGame())}>
+      <button className={s.btn} onClick={() => dispatch(restoreGame())}>
         &#9654;
       </button>
-     
     </div>
   );
 };

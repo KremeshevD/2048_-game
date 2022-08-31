@@ -1,8 +1,9 @@
 import { useMemo } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { toNextLevel } from "../../Store/asyncAction"
-import { Cell } from "./Cell"
-import { ModalWindow } from "./ModalWindow"
+import { Cell } from "../Cell/Cell"
+import { ModalWindow } from "../ModalWindow/ModalWindow"
+import s from "./NewLevel.module.css"
 
 export const NewLevel = () => {
     const newLevelData = useSelector(state => state.game.newLevelData)
@@ -19,7 +20,7 @@ export const NewLevel = () => {
     
     return (
         <ModalWindow>
-                <div className="newLevelWindow">
+                <div className={s.newLevelWindow}>
                     <div>NEW LEVEL</div>
                     <div>BLOCK ELIMINATED</div>
                     <Cell cell={elimenatedBlock}/>

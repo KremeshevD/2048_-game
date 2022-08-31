@@ -1,0 +1,8 @@
+  .buttonBlock {
+    display: flex;
+    justify-content: space-around;
+    flex-direction: row;
+    height: 4rem;
+  }
+  
+ 

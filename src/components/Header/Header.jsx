@@ -1,6 +1,7 @@
 import { useSelector } from "react-redux";
 import { valueToStringNumber } from "../../Utils/getValueForDisplay";
-import { Diamonds } from "./Diamonds";
+import { Diamonds } from "../Diamonds/Diamonds";
+import s from './Header.module.css'
 
 export const Header = () => {
     const diamonds = useSelector(state => state.game.diamonds)
@@ -8,10 +9,10 @@ export const Header = () => {
     score = valueToStringNumber(score, 6)
 
   return (
-    <div className="header">
+    <div className={s.header}>
       <Diamonds value={diamonds} />
-      <div className="info">
-        <div className="crown"/>
+      <div className={s.info}>
+        <div className={s.crown}/>
         <span>
          {score}
         </span>

@@ -1,4 +1,4 @@
-
+import s from './PathSegment.module.css'
 
 export const PathSegment = ({pathSegment}) => {
     let style = {
@@ -11,7 +11,7 @@ export const PathSegment = ({pathSegment}) => {
     }
     return (
         <div 
-            className="pathSegment" 
+            className={s.pathSegment} 
             style={style} 
         > 
         </div>

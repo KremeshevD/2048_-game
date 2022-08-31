@@ -1,0 +1,9 @@
+.game {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-width: 31rem;
+    min-height: 57rem;
+  }

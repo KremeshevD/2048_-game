@@ -1,0 +1,24 @@
+.info {
+  display: flex;
+  background-color: rgb(87, 87, 87);
+  border-radius: 0.5rem;
+  width: 8rem;
+  height: 2rem;
+  padding: 0.5rem;
+  justify-content: start;
+  align-items: center;
+  box-shadow: -0.2rem -0.2rem 0.2rem 0rem rgba(255, 255, 255, 0.5) inset;
+}
+
+.header {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  margin-top: 0.5rem;
+}
+
+.crown:before {
+    width: 2rem;
+    height: 1.5rem;
+    content: '\1F451';
+  }

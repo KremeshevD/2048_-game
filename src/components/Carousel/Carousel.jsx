@@ -1,13 +1,15 @@
-import { Cell } from "./Cell"
+import { BonusPrice } from "../BonusPrice/BonusPrise"
+import { Cell } from "../Cell/Cell"
+import s from "./Carousel.module.css"
 
 export const Carousel = ({list, onClick}) => {
     return (
-        <div className="carousel">
+        <div className={s.carousel}>
             {list.map( cell => {
                 return (
-                    <div className="carouselItem">
+                    <div className={s.carouselItem}>
                         <Cell cell={cell} onClick={onClick} isSelected={cell.isSelected}/>
-                        {cell.price > 0 && <span className="bonusPrice">{cell.price}</span>}
+                        {cell.price > 0 && <BonusPrice price={cell.price} />}
                     </div>
                 )
                 }

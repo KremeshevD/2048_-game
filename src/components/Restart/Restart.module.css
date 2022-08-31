@@ -1,0 +1,44 @@
+.restartWindow {
+    height: 100%;
+  }
+  .column {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: column;
+    max-width: 100%;
+    height: 100%;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+  }
+  .restartWindowHeader {
+      display: flex;
+      justify-content: space-between;
+  }
+  .exit {
+      font-size: 1.5rem;
+      height: 2rem;
+      width: 2rem;
+      border: 0.1rem solid white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+  }
+  .exit:hover {
+      color: red;
+  }
+  .btn-big {
+    width: 20rem;
+    margin: 0 auto;
+    height: 3rem;
+    font-size: 2rem;
+    background-color: lightgreen;
+    color: white;
+    border-radius: 1rem;
+    transition: 0.4s;
+  }
+  .btn-big:hover {
+    background-color: #397524;
+    transition: 0.4s;
+  }

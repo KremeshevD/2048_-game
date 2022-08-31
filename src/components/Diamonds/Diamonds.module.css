@@ -1,0 +1,22 @@
+.info {
+    display: flex;
+    background-color: rgb(87, 87, 87);
+    border-radius: 0.5rem;
+    width: 8rem;
+    height: 2rem;
+    padding: 0.5rem;
+    justify-content: start;
+    align-items: center;
+    box-shadow: -0.2rem -0.2rem 0.2rem 0rem rgba(255, 255, 255, 0.5) inset;
+  }
+  .diamondBlock span {
+    font-size: 1.5rem;
+    font-weight: 500;
+  }
+  
+  .diamond {
+    width: 2rem;
+    height: 1.5rem;
+    background-image: url(/public/img/diamond.svg);
+    background-repeat: no-repeat;
+  }

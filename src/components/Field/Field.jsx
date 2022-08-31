@@ -2,8 +2,9 @@ import { useDispatch, useSelector } from "react-redux"
 import { destroyCell } from "../../Store/asyncAction"
 import { setSwapingCells, startTurn } from "../../Store/gameReducer"
 import { parseCellFromEvent } from "../../Utils/eventParser"
-import { Cell } from "./Cell"
-import { PathSegment } from "./PathSegment"
+import { Cell } from "../Cell/Cell"
+import { Path } from "../Path/Path"
+import s from "./Field.module.css"
 
 export const Field = () => {
     const field = useSelector(state => state.game.field)
@@ -29,8 +30,9 @@ export const Field = () => {
         }
     }
    return ( 
-
-                <div className="field">
+    <>
+        <hr className={s.line}/>
+            <div className={s.field} id='field'>
                     {field.map(cell => <Cell 
                         cell={cell} 
                         top={cell.top}
@@ -38,13 +40,14 @@ export const Field = () => {
                         onPointerDown={pointerDownHandler}
                         onClick = {bonusModeHandler}
                         isSelected = {selectedCells.filter( selectedCell => selectedCell.id === cell.id).length ? true : false}
-                        className="cell"
                         maxValueOnField = {maxValueOnField}
                         /> )}
                     {
-                        pathSegments.length && pathSegments.map(item => <PathSegment pathSegment={item} key={item.id}/>)
+                        pathSegments.length && <Path path={pathSegments}/>
                     }
                 
-    </div>
+            </div>
+        <hr  className={s.line}/>
+    </>
     )
 }

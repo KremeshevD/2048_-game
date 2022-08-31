@@ -1,7 +1,8 @@
 import { useMemo } from 'react';
+import s from './ButtonBlock.module.css'
 import { useDispatch, useSelector } from 'react-redux';
-import { restartMode, setDestroyMode, setSwapMode } from '../../../Store/gameReducer';
-import { ButtonCustom } from './ButtonCustom';
+import { setDestroyMode, setRestartMode, setSwapMode } from '../../Store/gameReducer';
+import { ButtonCustom } from '../ButtomCustom/ButtonCustom';
 
 export const ButtonBlock = () => {
   const dispatch = useDispatch();
@@ -41,7 +42,7 @@ export const ButtonBlock = () => {
       style: 'restart',
       id: 20 + Date.now(),
       handler: () => {
-        dispatch(restartMode());
+        dispatch(setRestartMode());
       },
     };
   }, [isRestartMode]);
@@ -50,7 +51,7 @@ export const ButtonBlock = () => {
     ? buttons.filter((item) => item.isOn)
     : buttons;
   return (
-    <div className="buttonBlock">
+    <div className={s.buttonBlock}>
       {buttons.map((button) => (
         <ButtonCustom {...button} key={button.id} />
       ))}

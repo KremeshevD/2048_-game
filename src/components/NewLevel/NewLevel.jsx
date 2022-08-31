@@ -26,7 +26,9 @@ export const NewLevel = () => {
                     <Cell cell={elimenatedBlock}/>
                     <div>NEW BLOCK ADDED</div>
                     <Cell cell={newBlockAdded}/>
-                    <button className="btn-big" onClick={closeHandler}>Ok</button>
+                    <div>REWARD</div>
+                    <span className={s.reward}>{newLevelData.diamonds}</span>
+                    <button className={s.btnBig} onClick={closeHandler}>Ok</button>
                 </div>
         </ModalWindow>
     )

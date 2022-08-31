@@ -3,5 +3,33 @@
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    gap: 2rem;
+    gap: 1rem;
+  }
+  .btnBig {
+    width: 20rem;
+    margin: 0 auto;
+    height: 3rem;
+    font-size: 2rem;
+    background-color: lightgreen;
+    color: white;
+    border-radius: 1rem;
+    transition: 0.4s;
+  }
+  .btnBig:hover {
+    background-color: #397524;
+    transition: 0.4s;
+  }
+
+  .reward {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2rem;
+  }
+  .reward::before {
+    content: '';
+    width: 2.5rem;
+    height: 2rem;
+    background-image: url(/public/img/diamond.svg);
+    background-repeat: no-repeat;
   }

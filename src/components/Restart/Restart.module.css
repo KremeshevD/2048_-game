@@ -28,7 +28,7 @@
   .exit:hover {
       color: red;
   }
-  .btn-big {
+  .btnBig {
     width: 20rem;
     margin: 0 auto;
     height: 3rem;
@@ -38,7 +38,7 @@
     border-radius: 1rem;
     transition: 0.4s;
   }
-  .btn-big:hover {
+  .btnBig:hover {
     background-color: #397524;
     transition: 0.4s;
   }

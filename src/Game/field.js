@@ -26,7 +26,7 @@ export class Field {
     }
 
     #getRandom () {
-        const value = Math.floor((Math.random () * (this.#maxValue-this.#minValue)) + this.#minValue)
+        const value = Math.round((Math.random () * (this.#maxValue-this.#minValue+0.5)) + this.#minValue)
         return value
     }
     isAnyMoveAvalable() {

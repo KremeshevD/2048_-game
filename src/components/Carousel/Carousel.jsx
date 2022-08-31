@@ -8,8 +8,8 @@ export const Carousel = ({list, onClick}) => {
             {list.map( cell => {
                 return (
                     <div className={s.carouselItem}>
-                        <Cell cell={cell} onClick={onClick} isSelected={cell.isSelected}/>
-                        {cell.price > 0 && <BonusPrice price={cell.price} />}
+                        <Cell cell={cell} onClick={onClick} isSelected={cell.isSelected} key={cell.id}/>
+                        {cell.price > 0 && <BonusPrice price={cell.price} key={ Date.now() + cell.id} />}
                     </div>
                 )
                 }

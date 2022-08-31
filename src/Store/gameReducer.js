@@ -9,6 +9,7 @@ if (savedGame) {
   let cellSize = 5;
   savedGame = JSON.parse(savedGame);
   savedGame.cellSize = cellSize;
+  savedGame.diamonds = parseInt(localStorage.getItem('diamonds')) || 0
   game.restore(savedGame);
 }
 const initialState = {
@@ -19,6 +20,8 @@ const initialState = {
   isRestartMode: false,
   selectedCells: [],
   isRestored: savedGame ? true : false,
+  recordScore: parseInt(localStorage.getItem('recordScore')) || 0,
+  diamonds: parseInt(localStorage.getItem('diamonds')) || 0
 };
 
 export const gameSlice = createSlice({
@@ -62,7 +65,10 @@ export const gameSlice = createSlice({
     },
     setRestartMode(state) {
       state.isRestartMode = !state.isRestartMode;
-      state.avalableBlocks = state.isRestartMode? game.generateCostStartBlock() : [];
+      state.avalableBlocks = state.isRestartMode ? game.generateCostStartBlock() : [];
+    },
+    setGameOver(state) {
+      state.isGameOver = true;
     },
     startNewGame(state, { payload }) {
       game.restart(payload);
@@ -74,10 +80,12 @@ export const gameSlice = createSlice({
       state.score = curGame.score;
       state.diamonds = curGame.diamonds;
       state.maxValueOnField = curGame.maxValueOnField;
-      state.bonusCost = curGame.bonusCost;
+      state.bonusPrice = curGame.bonusPrice;
       state.isDestroyMode = false;
       state.isSwapMode = false;
       localStorage.setItem('game', JSON.stringify(state));
+      localStorage.setItem('recordScore', JSON.stringify(state.recordScore))
+      localStorage.setItem('diamonds', JSON.stringify(state.diamonds))
     },
   },
   extraReducers: {
@@ -91,7 +99,6 @@ export const gameSlice = createSlice({
       state.diamonds = curGame.diamonds;
       state.maxValueOnField = curGame.maxValueOnField;
     },
-    [overTurn.fulfilled]: (state) => {},
     [overTurn.rejected]: (state) => {
       state.isTurn = false;
     },
@@ -111,25 +118,26 @@ export const gameSlice = createSlice({
       state.score = game.score;
       state.isGameOver = game.isGameOver;
       localStorage.setItem('game', JSON.stringify(state));
+      state.recordScore = state.recordScore > game.score ? state.recordScore : game.score
+      localStorage.setItem('recordScore', JSON.stringify(state.recordScore))
+      localStorage.setItem('diamonds', JSON.stringify(state.diamonds))
     },
-    [toNextStep.rejected]: (state) => {},
     [toNextLevel.pending]: (state) => {
       game.toNextLvl();
       const curGame = game.render();
       state.field = curGame.field;
       state.isNewLevel = curGame.isNewLevel;
       state.newLevelData = curGame.newLevelData;
-      state.bonusCost = curGame.bonusCost;
+      state.bonusPrice = curGame.bonusPrice;
     },
-    [toNextLevel.fulfilled]: (state) => {},
     [toNextLevel.rejected]: (state) => {
       state.isTurn = false;
     },
     [destroyCell.pending]: (state) => {
       state.isDestroyMode = false;
       state.diamonds = game.diamonds;
+      localStorage.setItem('diamonds', JSON.stringify(state.diamonds))
     },
-    [destroyCell.fulfilled]: (state) => {},
     [destroyCell.rejected]: (state) => {
       state.isDestroyMode = false;
     },
@@ -138,6 +146,7 @@ export const gameSlice = createSlice({
       const curGame = game.render();
       state.field = curGame.field;
       state.diamonds = curGame.diamonds;
+      localStorage.setItem('diamonds', JSON.stringify(state.diamonds))
     },
   },
 });
@@ -151,4 +160,5 @@ export const {
   restoreGame,
   setRestartMode,
   startNewGame,
+  setGameOver,
 } = gameSlice.actions;

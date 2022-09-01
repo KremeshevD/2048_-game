@@ -65,6 +65,7 @@ export const gameSlice = createSlice({
     },
     setRestartMode(state) {
       state.isRestartMode = !state.isRestartMode;
+      state.isGameOver = false
       state.avalableBlocks = state.isRestartMode ? game.generateCostStartBlock() : [];
     },
     setGameOver(state) {

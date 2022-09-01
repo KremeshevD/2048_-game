@@ -45,9 +45,11 @@ export class Game {
     return false;
   }
   #isNewLevel(value) {
+    const numberQty = this.maxValueOnField - this.minValue;
+    console.log(numberQty, this.minValue, this.maxValueOnField)
     if (value > this.maxValueOnField) {
       const dif = this.maxValueOnField - this.maxValue;
-      const numberQty = this.maxValueOnField - this.minValue;
+      
       let levelDiamonds = 0;
       this.maxValueOnField = value;
       if (this.maxValueOnField >= 9 && this.minValue === 1) {

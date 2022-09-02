@@ -21,7 +21,8 @@ const initialState = {
   selectedCells: [],
   isRestored: savedGame ? true : false,
   recordScore: parseInt(localStorage.getItem('recordScore')) || 0,
-  diamonds: parseInt(localStorage.getItem('diamonds')) || 0
+  diamonds: parseInt(localStorage.getItem('diamonds')) || 0,
+  newDiamonds: 0
 };
 
 export const gameSlice = createSlice({
@@ -97,6 +98,7 @@ export const gameSlice = createSlice({
       state.pathSegments = game.path.pathSegments;
       state.field = curGame.field;
       state.score = curGame.score;
+      state.newDiamonds = curGame.diamonds > state.diamonds ? curGame.diamonds-state.diamonds : 0
       state.diamonds = curGame.diamonds;
       state.maxValueOnField = curGame.maxValueOnField;
     },
@@ -122,6 +124,7 @@ export const gameSlice = createSlice({
       state.recordScore = state.recordScore > game.score ? state.recordScore : game.score
       localStorage.setItem('recordScore', JSON.stringify(state.recordScore))
       localStorage.setItem('diamonds', JSON.stringify(state.diamonds))
+      state.newDiamonds = 0
     },
     [toNextLevel.pending]: (state) => {
       game.toNextLvl();

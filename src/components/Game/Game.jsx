@@ -16,7 +16,6 @@ export const Game = () => {
     const isGameOver = useSelector(state => state.game.isGameOver)
     const isRestored = useSelector(state => state.game.isRestored)
     const isRestartMode = useSelector(state => state.game.isRestartMode)
-
     const dispatch = useDispatch()
 
     const overTurnHandler = () => {

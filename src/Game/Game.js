@@ -46,7 +46,6 @@ export class Game {
   }
   #isNewLevel(value) {
     const numberQty = this.maxValueOnField - this.minValue;
-    console.log(numberQty, this.minValue, this.maxValueOnField)
     if (value > this.maxValueOnField) {
       const dif = this.maxValueOnField - this.maxValue;
       

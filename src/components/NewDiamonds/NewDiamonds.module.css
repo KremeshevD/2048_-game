@@ -1,0 +1,55 @@
+.newDiamonds {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 60%;
+    left: 50%;
+    animation: move 0.6s linear;
+    z-index: 15;
+    font-size: 2rem;
+    color: white;
+    transform: scale(0);
+  }
+  .newDiamonds::before {
+    content: '';
+    width: 2.5rem;
+    height: 2rem;
+    background-image: url(/public/img/diamond.svg);
+    background-repeat: no-repeat;
+  }
+.text {
+  position: absolute;
+  top: 15rem;
+  left: 4rem;
+  font-size: 6rem;
+  color: red;
+  z-index: 14;
+  opacity: 0.8;
+  font-weight: 600;
+  transform: scale(0);
+  animation: appea 0.6s linear;
+}
+
+@keyframes move {
+    0% {
+        transform: scale(1);
+    }
+    90% {
+      transform: scale(1);
+    }
+    100% {
+        top: -3rem;
+        left: 1rem;
+    }
+}
+
+@keyframes appea {
+   50% {
+      transform: scale(1);
+   } 
+   100% {
+    transform: scale(1);
+ } 
+}
+

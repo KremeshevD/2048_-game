@@ -1,0 +1,14 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    gap: 2rem;
+  }
+
+.buttons {
+    display: flex;
+    height: 4rem;
+    width: 100%;
+    justify-content: space-around;
+}

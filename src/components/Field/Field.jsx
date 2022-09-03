@@ -2,21 +2,17 @@ import { useDispatch, useSelector } from "react-redux"
 import { destroyCell } from "../../Store/asyncAction"
 import { setSwapingCells, startTurn } from "../../Store/gameReducer"
 import { parseCellFromEvent } from "../../Utils/eventParser"
-import { Cell } from "./Cell"
-import { PathSegment } from "./PathSegment"
+import { Cell } from "../Cell/Cell"
+import { Path } from "../Path/Path"
+import s from "./Field.module.css"
 
 export const Field = () => {
-    const cellSize = useSelector( state => state.game.cellSize)
     const field = useSelector(state => state.game.field)
     const pathSegments = useSelector(state => state.game.pathSegments)
     const isSwapMode = useSelector(state => state.game.isSwapMode)
     const isDestroyMode = useSelector(state => state.game.isDestroyMode)
-    const swapingCells = useSelector( state => state.game.swapingCells)
+    const selectedCells = useSelector( state => state.game.selectedCells)
     const maxValueOnField = useSelector( state => state.game.maxValueOnField)
-    const fieldStyle = {
-        width: cellSize*5.8,
-        height: cellSize*9.4,
-    }
 
     const dispatch = useDispatch()
     const pointerDownHandler = (e) => {
@@ -34,22 +30,24 @@ export const Field = () => {
         }
     }
    return ( 
-
-                <div className="field" style={fieldStyle}>
+    <>
+        <hr className={s.line}/>
+            <div className={s.field} id='field'>
                     {field.map(cell => <Cell 
                         cell={cell} 
                         top={cell.top}
                         key={cell.id} 
                         onPointerDown={pointerDownHandler}
                         onClick = {bonusModeHandler}
-                        isSwaping = {swapingCells.filter( spaingCell => spaingCell.id === cell.id).length ? true : false}
-                        className="cell"
+                        isSelected = {selectedCells.filter( selectedCell => selectedCell.id === cell.id).length ? true : false}
                         maxValueOnField = {maxValueOnField}
                         /> )}
                     {
-                        pathSegments.length && pathSegments.map(item => <PathSegment pathSegment={item} key={item.id}/>)
+                        pathSegments.length && <Path path={pathSegments}/>
                     }
                 
-    </div>
+            </div>
+        <hr  className={s.line}/>
+    </>
     )
 }

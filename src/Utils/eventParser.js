@@ -17,9 +17,10 @@ export const parseCellFromEvent = (e) => {
     return false
 }
 export const getPointerPosition = (e) => {
-    let coordinate = e.target.closest('.field').getBoundingClientRect()
-    let left = Math.floor(e.clientX - coordinate.left)
-    let top = Math.floor(e.clientY - coordinate.top)
+    let coordinate = e.target.closest('#field').getBoundingClientRect()
+    let remSize = parseFloat(getComputedStyle(document.querySelector('html')).fontSize)
+    let left = (e.clientX - coordinate.left)/remSize
+    let top =  (e.clientY - coordinate.top)/remSize
     const cell = parseCellFromEvent(e)
     return {left, top, cell}
 }

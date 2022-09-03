@@ -1,9 +1,12 @@
 export class PathSegment {
+    #offsetY 
     constructor(xs,ys, color, xe = xs, ye = ys) {
+        this.height = 0.5 
+        this.#offsetY = this.height/2
         this.xs = xs
-        this.ys = ys
+        this.ys = ys - this.#offsetY
         this.xe = xe
-        this.ye = ye
+        this.ye = ye - this.#offsetY
         this.id = xs+''+ys+''+Date.now()
         this.color = color
         this.setVector()
@@ -11,7 +14,7 @@ export class PathSegment {
 
     setEndPoint(x, y) {
         this.xe = x
-        this.ye = y
+        this.ye = y - this.#offsetY
         this.setVector()
     }
     setVector() {
@@ -29,7 +32,8 @@ export class PathSegment {
             color: this.color,
             id: this.id,
             angle: this.angle,
-            length: this.length
+            length: this.length,
+            height: this.height
         }
     }
 }

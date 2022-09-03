@@ -1,0 +1,82 @@
+.btn {
+    width: 20rem;
+    margin: 0 auto;
+    height: 3rem;
+    font-size: 2rem;
+    background-color: lightgreen;
+    color: white;
+    border-radius: 1rem;
+    transition: 0.4s;
+  }
+  .btn:hover {
+    background-color: #397524;
+    transition: 0.4s;
+    color: red;
+  }
+  .container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 3rem;
+    height: 100%;
+  }
+  .circle {
+    height: 13rem;
+    width: 13rem;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .circle::before {
+    content: '';
+    position: absolute;
+    height: 13rem;
+    width: 13rem;
+    top: 0.5rem;
+    left: 0.5 rem;
+    border-right: solid 0.3rem red;
+    border-top: solid 0.3rem red;
+    animation: rotateCircle1 2s linear infinite;
+    border-radius: 50%;
+  }
+  .circle::after {
+    content: '';
+    position: absolute;
+    height: 13rem;
+    width: 13rem;
+    top: -0.5rem;
+    left: -0.5rem;
+    border-left: solid 0.3rem blue;
+    border-bottom: solid 0.3rem blue;
+    animation: rotateCircle2 2s linear infinite;
+    border-radius: 50%;
+  }
+  
+  .cellArea {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+
+  @keyframes rotateCircle1 {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+  @keyframes rotateCircle2 {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(-360deg);
+    }
+  }

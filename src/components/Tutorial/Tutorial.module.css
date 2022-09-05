@@ -1,0 +1,7 @@
+.tutorial {
+    height: 5rem;
+    width: 22rem;
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+}

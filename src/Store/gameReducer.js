@@ -19,7 +19,7 @@ const initialState = {
   isDestroyMode: false,
   isRestartMode: false,
   selectedCells: [],
-  isRestored: savedGame ? true : false,
+  isRestored: true,
   recordScore: parseInt(localStorage.getItem('recordScore')) || 0,
   diamonds: parseInt(localStorage.getItem('diamonds')) || 0,
   newDiamonds: 0

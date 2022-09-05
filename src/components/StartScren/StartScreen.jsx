@@ -2,6 +2,7 @@ import { useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setRestartMode, restoreGame } from '../../Store/gameReducer';
 import { Cell } from '../Cell/Cell';
+import { Tutorial } from '../Tutorial/Tutorial';
 import s from './StartScreen.module.css'
 
 export const StartScreen = () => {
@@ -19,6 +20,7 @@ export const StartScreen = () => {
       },
     };
   }, []);
+
   return (
     <div className={s.container}>
       <div className={s.cellArea}>
@@ -30,6 +32,7 @@ export const StartScreen = () => {
       <button className={s.btn} onClick={() => dispatch(restoreGame())}>
         &#9654;
       </button>
+      <Tutorial />
     </div>
   );
 };

@@ -5,8 +5,8 @@ import { Path } from './Path';
 export class Game {
   constructor(cellSize) {
     this.cellSize = cellSize;
-    this.minValue = 3;
-    this.maxValue = 17;
+    this.minValue = 1;
+    this.maxValue = 7;
     this.field = new Field(cellSize, this.minValue, this.maxValue);
     this.maxValueOnField = this.maxValue;
     this.score = 0;

@@ -5,8 +5,8 @@ import { Path } from './Path';
 export class Game {
   constructor(cellSize) {
     this.cellSize = cellSize;
-    this.minValue = 1;
-    this.maxValue = 7;
+    this.minValue = 3;
+    this.maxValue = 17;
     this.field = new Field(cellSize, this.minValue, this.maxValue);
     this.maxValueOnField = this.maxValue;
     this.score = 0;
@@ -47,8 +47,7 @@ export class Game {
   #isNewLevel(value) {
     const numberQty = this.maxValueOnField - this.minValue;
     if (value > this.maxValueOnField) {
-      const dif = this.maxValueOnField - this.maxValue;
-      
+      const dif = value-this.maxValueOnField;
       let levelDiamonds = 0;
       this.maxValueOnField = value;
       if (this.maxValueOnField >= 9 && this.minValue === 1) {
